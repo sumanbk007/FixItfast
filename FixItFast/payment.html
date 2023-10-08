@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    
+</head>
+<body>
+    
+
+    <form id="payment-form">
+        <input type="text" id="card-number" placeholder="Card Number" required>
+        <input type="text" id="card-expiry" placeholder="MM/YY" required>
+        <input type="text" id="card-cvc" placeholder="CVC" required>
+        <button type="submit">Pay Now</button>
+      </form>
+
+
+      <script>
+        var stripe = Stripe('BBxEHAID6jN5VyXnzhnrX8jmJXEKMllxVk6VMv5vVPVe_XDGYnOb5Js2vq_lTRR1W9gFHgCf_ZmQy0Is_wsmbxw');
+
+var form = document.getElementById('payment-form');
+form.addEventListener('submit', function(event) {
+  event.preventDefault();
+  
+  stripe.createToken('card', {
+    number: document.getElementById('card-number').value,
+    exp_month: document.getElementById('card-expiry').value.split('/')[0],
+    exp_year: document.getElementById('card-expiry').value.split('/')[1],
+    cvc: document.getElementById('card-cvc').value
+  }).then(function(result) {
+    if (result.error) {
+      // Handle error
+      console.error(result.error);
+    } else {
+      // Send token to your Firebase Cloud Function
+      var token = result.token.id;
+      sendTokenToServer(token);
+    }
+  });
+});
+
+function sendTokenToServer(token) {
+  // Make an HTTP request to your Firebase Cloud Function
+  // Pass the token to the server for further processing
+}
+
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+const stripe = require('stripe')('fe99653d1286d9790afdb66b517b48a9225145a1');
+
+exports.processPayment = functions.https.onRequest(async (req, res) => {
+  try {
+    // Retrieve the token from the request
+    const token = req.body.token;
+
+    // Use the Stripe API to create a charge
+    const charge = await stripe.charges.create({
+      amount: 1000, // Amount in cents
+      currency: 'usd',
+      source: token,
+      description: 'Example Payment'
+    });
+
+    // Handle the success case
+    console.log(charge);
+    res.send({ success: true });
+  } catch (error) {
+    // Handle the error case
+    console.error(error);
+    res.status(500).send({ error: 'Payment failed' });
+  }
+});
+
+      </script>
+</body>
+</html>

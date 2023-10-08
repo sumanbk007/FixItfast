@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/CSS/style.css">
+    <link rel="stylesheet" href="/CSS/normalize.css">
+    <script src="https://kit.fontawesome.com/30d17e141a.js" crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+    <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init('VpQnBtJmCtjwdvilJ');
+        })();
+    </script>
+
+    <title>FIxItFast</title>
+    <link rel="icon" href="/Images/favicon.png">
+</head>
+
+<body>
+
+    <header>
+        <nav class="navbar">
+
+            <div class="logo">
+                <a href="index.html">
+                    <img src="/Images/f-logo.png" alt="logo">
+                </a>
+            </div>
+
+
+            <div class="navbar-links">
+                <ul>
+
+
+                    <li class="item"><a href="#about-us">About us</a></li>
+                    <li class="item"><a href="#service">Services</a></li>
+                    <li class="item"><a href="#reviews">Reviews</a></li>
+                    <li class="item"><a href="faq.html">FAQ</a></li>
+                    <li class="item"><a href="#contact">Contacts</a></li>
+
+
+                </ul>
+
+            </div>
+
+            <a href="#" id="toggle-button" class="toggle-button">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </a>
+
+            <div class="details">
+
+            <div class="login">
+                <a class="hDetails" href="login.html" style="color: white; !important"><i class="fa-sharp fa-solid fa-user"></i> Login </a>
+            </div>
+
+            <div id="registerBtn">
+
+               <!-- <a> <button>Register</button></a> -->
+                <a class="hDetails"><i class="fa-solid fa-square-pen"></i> Register </a>
+            </div>
+        </div>
+
+        </nav>
+
+        <!-- RegistrationFormContainer -->
+
+        <div id="registration-form-container">
+          
+            <div class="registration-form-content">
+                <h1>Welcome to our Registration</h1>
+                <div class="confirst">
+                    <h2>Register</h2>
+                    <i class="fa-solid fa-square-xmark" id="cross"></i>
+                </div>
+              
+            <div class="consecond">
+               <a href="signup.html" id="seeker"> <button >Service Seeker</button></a>
+               <a href="demo.html" id="provider"> <button >Service Provider</button></a>
+            </div>
+            <hr id="hrline">
+            </div>
+          </div>
+    </header>
+
+    <section class="banner" id="banner">
+        <div class="bannner-container">
+            <div class="banner-image">
+        <img src="Images/ball.jpg" alt="image">
+    </div>
+        <div class="banner-content">
+            <h3>Lighting Up Homes, Fixing Leaks- FixItFast</h3>
+        </div>
+        
+        <div class="centered-content">
+            
+            <select class="dropdown" id="expertise">
+                <option value="" disabled selected>Select an expertise</option>
+                <option value="Plumbing">Plumbing</option>
+                <option value="Electrician">Electrician</option>
+            </select>
+            <button type="button" id="getLocationBtn">Get Current Location</button>
+            <div class="search-button" id="searchButton">
+                <i class="fa fa-search"></i>
+                <span>Search</span>
+            </div>
+
+
+        </div>
+    </div>
+       
+    </section>
+
+    <!-- Sevice section -->
+
+    <section class="service" id="service">
+        <h1 class="heading"> Our<span> Services </span></h1>
+        <div class="box-container ">
+            <div class="box service-box">
+                <img src="/Images/s1.png" alt="pic">
+                <h3>Plumbing Repair Service</h3>
+                <p>Professional electricians providing installations and wiring services
+                    for new construction projects and existing homes.
+                </p>
+
+                <a href="contact.html"><button>More Info</button></a>
+            </div>
+
+            <div class="box service-box">
+                <img src="/Images/s2.png" alt="pic">
+
+                <h3>Electrical Repair Service</h3>
+                <p>Professional electricians providing installations and wiring services
+                    for new construction projects and existing homes.
+                </p>
+                <a href="contact.html"><button>More Info</button></a>
+            </div>
+
+            <div class="box service-box">
+                <img src="/Images/s3.png" alt="pic">
+                <h3>Emergeny service</h3>
+                <p>Providing 24/7 emergency services for plumbing and electrical
+                    emergencies, circuit breaker repairs and more.
+                </p>
+
+                <a href="contact.html"><button>More Info</button></a>
+            </div>
+
+
+        </div>
+    </section>
+<!-- About us -->
+<section id="about-us" class="about-us">
+        <h2>About us</h2>
+        <div class="about-container">
+            <div class="about-left">
+             <img src="/Images/aboutus (1).png" alt="">   
+            </div>
+            <div class="about-right">
+                <p>AtFixItFast, we have been providing top-notch plumbing and electrical solutions to homes and businesses for over 15 years. 
+                    Our team of experienced professionals is dedicated to delivering exceptional service and ensuring customer satisfaction.
+                    Our team consists of highly trained and certified plumbers and electricians who possess extensive
+                     knowledge and expertise in their respective fields. With their skills and years of experience,
+                      they are equipped to handle a wide range of projects, from routine repairs and installations to 
+                      complex renovations and troubleshooting.<br>
+                      <br>
+                      <br>
+                    
+                      For all your plumbing and electrical needs, reach out to FixItFast. We're here to help! Contact us today at 9811667780 or email us at fixitfast07@gmail.com. We look forward to serving you.</p>
+            </div>
+        </div>
+    </section>
+    
+
+
+   
+
+    <!-- Reviews section -->
+
+    <section class="reviews" id="reviews">
+        <h1 class="heading"> Customer's<span> Review </span></h1>
+        <div class="box-container">
+            <div class="box">
+                <img src="/Images/riview (3).jpg" alt="pic">
+                <p>I had a plumbing emergency at my home, and I called FixItFast Plumbing & Electric Services. They responded promptly and fixed the issue efficiently.
+                     The plumber was knowledgeable and professional. I highly recommend their services.</p>
+                <h3>Alex Nepali</h3>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half"></i>
+                </div>
+
+            </div>
+            <div class="box" id="second-box">
+                <img src="/Images/riview (1).jpg" alt="pic">
+                <p>"I had some minor plumbing repairs to be done, and I hired FixItFast Plumbing & Electric Services based on their positive reviews. While the plumber fixed the issues adequately, I found their pricing a bit on the higher side compared to other service providers in the area. 
+                    Overall, decent service but could be more competitive with pricing.</p>
+                <h3>Sita pokhrel</h3>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half"></i>
+
+                </div>
+
+            </div>
+            <div class="box">
+                <img src="/Images/riview (2).jpg" alt="pic">
+                <p>I recently hired FixItFast Plumbing & Electric Services to install new electrical fixtures in my house. The electrician did a great job, and everything works perfectly. The only reason I'm not giving them 5 stars is that the appointment was delayed by a few hours.
+                     However, the quality of work was excellent.</p>
+
+                <h3>Jessi Rawal</h3>
+                <div class="star">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+     <!-- Contact section -->
+
+     <section class="contact" id="contact">
+
+        <div class="max-width">
+            <h2 class="title" style="color:black">Contact us</h2>
+            <div class="contact-content">
+                <div class="column left">
+                    <div class="text">Get in touch</div>
+                    <p>Get in touch for all your plumbing and electrical needs!</p>
+                    <div class="icons">
+                        <div class="row">
+                            <i class="fas fa-user"></i>
+                            <div class="info">
+                                <div class="head">Name</div>
+                                <div class="sub-title">FixItFast</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="info">
+                                <div class="head">Address</div>
+                                <div class="sub-title">Kathmandu, Nepal</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <i class="fas fa-envelope"></i>
+                            <div class="info">
+                                <div class="head">Email</div>
+                                <div class="sub-title">fixitfast067@gmail.com</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="column right">
+                    <div class="text">Message me</div>
+                    <form id="contactForm">
+                        <div class="fields">
+                            <div class="field name">
+                                <input type="text" id="name" placeholder="Name" required>
+                            </div>
+                            <div class="field email">
+                                <input type="email" id="email" placeholder="Email" required>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="text" id="subject" placeholder="Subject" required>
+                        </div>
+                        <div class="field textarea">
+                            <textarea id="message" cols="30" rows="10" placeholder="Message.." required></textarea>
+                        </div>
+                        <div class="button-area">
+                            <button type="submit">Send message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+    <!-- footer section -->
+    <footer>
+        <div class="row">
+            <div class="col">
+                <img src="/Images/fix it fast.png" class="f-logo" alt="Logo">
+                <p>Quality Plumbing and Electrical Services at Your Doorstep.
+                    <br>
+                    At Our Plumbing and Electrical Service Provider Website, we Strive to Exceed Expectations, Offering Reliable, 
+                    Timely, and Cost-Effective Solutions.</p>
+            </div>
+
+              
+                <div class="col">
+                    <h3>Office</h3>
+                    <p>MB Road</p>
+                    <p>Santinagar, Kathmandu</p>
+                    <p>Bagmati, PIN 44600, Nepal</p>
+                    <p class="email-id">fixitfast@067gamil.com</p>
+                    <h4>+977 - 9848425132</h4>
+                </div>
+                <div class="col">
+                    <h3 class="f-head">Links</h3>
+                    <ul>
+                        <li><a href="">Home</a></li>
+                        <li><a href="">Services</a></li>
+                        <li><a href="">About Us</a></li>
+                        <li><a href="">Contacts</a></li>
+                        
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <h3>Newsletter</h3>
+                    <form >
+                        <div class="main-footer">
+                        <i class="fa-regular fa-envelope"></i>
+
+                        <input type="email" placeholder="Enter your email" required>
+                        <button type="submit"><i class="fa-solid fa-arrow-right"></i></button>
+                    </form>
+                </div>
+                    <div class="social-icons">
+                        <i class="fa-brands fa-facebook"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <i class="fa-brands fa-pinterest"></i>
+
+                    </div>
+                </div>
+            
+        </div>
+        <hr>
+        <p class="copyright">FixItFast © 2023 - All Rights Reserved</p>
+    </footer>
+
+
+
+    <script src="script.js">
+        
+const questions = document.querySelectorAll('.question-answer');
+
+
+document.addEventListener('DOMContentLoaded', function () {
+
+  questions.forEach(function (question) {
+    const btn = question.querySelector('.question-btn');
+    btn.addEventListener("click", function () {
+      console.log('clicked button')
+      questions.forEach(function (item) {
+        if (item !== question) {
+          item.classList.remove("show-text");
+        }
+      })
+      question.classList.toggle("show-text");
+    })
+  })
+});
+
+
+
+
+    </script>
+</body>
+
+</html>

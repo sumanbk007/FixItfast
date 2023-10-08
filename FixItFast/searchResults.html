@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Search Results</title>
+
+  <link rel="stylesheet" href="/CSS/style.css">
+  <style>
+    .service-result {
+
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+      align-items: center;
+      background-color:white;
+
+    }
+
+
+    #resultsContainer {
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      /* Two equal columns */
+      grid-gap: 10px;
+      /* Spacing between grid items */
+      background-color: #f0f0f0;
+      /* Just for visualization */
+      padding: 20px;
+      background-color:#b4acac;
+    }
+
+    .blog {
+
+      font-family: Verdana, Geneva, sans-serif;
+      color: black;
+    }
+
+    .blog h2 {
+
+      font-family: Georgia, serif;
+    }
+
+
+    .card {
+      width: 404px;
+      height: 150px;
+      border: 1px solid black;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1rem;
+      /* background-color:  rgb(217, 192, 241); */
+      border-radius: 7px;
+      cursor: pointer;
+      color: black;
+
+    }
+
+    .card .profile-picture {
+      width: 84px;
+      height: 100px;
+      background-color: #ccc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 40px;
+      margin-top: 1rem;
+      /* background-color:rgb(231, 152, 123); */
+      background-color: white;
+      color: black;
+
+    }
+
+    @media screen and (max-width: 600px){
+
+#resultsContainer{
+display: grid;
+  grid-template-columns: 1fr;
+}}
+  </style>
+
+</head>
+
+<body>
+
+  <nav class="navbar">
+
+    <div class="logo">
+      <a href="index.html">
+        <img src="/Images/f-logo.png" alt="logo">
+      </a>
+    </div>
+
+
+    <div class="navbar-links">
+      <ul>
+
+
+        <li class="item"><a href="index.html">Home</a></li>
+
+        <li class="item"><a href="faq.html">FAQ</a></li>
+        <li class="item"><a href="contact.html">Contacts</a></li>
+
+
+      </ul>
+
+    </div>
+
+    <a href="#" id="toggle-button" class="toggle-button">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </a>
+
+    <div id="registerBtn">
+
+      <a href="demo.html"> <button>Register</button></a>
+      <!-- <a class="active" href="demo.html"><i class="fa fa-user"></i> Register </a> -->
+    </div>
+
+
+  </nav>
+
+  <section class="service-result">
+    <div class="blog">
+      <h2>Available service provider near you!!</h2>
+      <p>With the available details you can contact
+        any of the professional service provider as your wish.</p>
+    </div>
+
+    <div id="resultsContainer">
+    </div>
+<script src="script.js"></script>
+    <script>
+      // Retrieve the search results from the query parameter
+      const urlParams = new URLSearchParams(window.location.search);
+      const encodedResults = urlParams.get('results');
+      const decodedResults = decodeURIComponent(encodedResults);
+      console.log('results: ' + decodedResults);
+    
+      let serviceProviders;
+      try {
+        serviceProviders = JSON.parse(decodedResults);
+      } catch (error) {
+        console.error('Error parsing JSON:', error);
+      }
+    
+      // Trim the whitespace in the location value
+      serviceProviders.forEach((serviceProvider) => {
+        serviceProvider.location = serviceProvider.location.trim();
+      });
+    
+      // Display the service providers on the page
+      const resultsContainer = document.getElementById('resultsContainer');
+      serviceProviders.forEach((serviceProvider) => {
+        // Create a card element for each service provider
+        const card = document.createElement('div');
+        card.classList.add('card');
+    
+        // Create profile picture element with first letter of name
+        const profilePicture = document.createElement('div');
+        profilePicture.classList.add('profile-picture');
+        profilePicture.textContent = serviceProvider.name.charAt(0).toUpperCase();
+    
+        // Create card content with name and mobile number
+        const name = document.createElement('h3');
+        name.textContent = 'Name: ' + serviceProvider.name;
+        const mobileNumber = document.createElement('p');
+        mobileNumber.textContent = 'Phone number: ' + serviceProvider.phoneNumber;
+    
+        // Append profile picture, name, and mobile number to the card
+        card.appendChild(profilePicture);
+        card.appendChild(name);
+        card.appendChild(mobileNumber);
+    
+        // Append the card to the results container
+        resultsContainer.appendChild(card);
+      });
+    </script>
+    
+
+
+</body>
+
+</html>

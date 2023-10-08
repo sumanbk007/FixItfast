@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="signup.css">
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-auth.js"></script>
+</head>
+
+<body>
+
+
+
+
+  <h3>Register as Service seeker</h3>
+  <form id="signup-form">
+    <label for="signup-email">Email:</label>
+    <input type="email" id="email" required>
+    <label for="signup-password">Password:</label>
+    <input type="password" id="password" required>
+    <button type="submit">Sign Up</button>
+  </form>
+
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyAjCj4qvrd-14h92Q5BOx25844Ojp-oid0",
+      authDomain: "fixitfast-24307.firebaseapp.com",
+      projectId: "fixitfast-24307",
+      storageBucket: "fixitfast-24307.appspot.com",
+      messagingSenderId: "142753407696",
+      appId: "1:142753407696:web:cb948e9a7ec1953d48b4d5",
+      measurementId: "G-P4B55N288F"
+    };
+    firebase.initializeApp(firebaseConfig);
+
+
+    // Get a reference to the Firestore database
+    const db = firebase.firestore();
+    // Get the registration form element
+    const signupForm = document.getElementById("signup-form");
+
+
+    // Add event listener for form submission
+    signupForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      // Prevent the form from submitting
+      const emailInput = document.getElementById("email");
+      const passwordInput = document.getElementById("password");
+
+
+
+      // Get the values from the form inputs
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+
+
+      // Create a new service provider object
+      const serviceProvider = {
+        email: email,
+        userType: "seeker"
+      };
+
+
+      // Save the service provider data to Firestore
+      db.collection("users")
+        .doc() // Automatically generate a new unique ID for the document
+        .set(serviceProvider)
+        .then(() => {
+          console.log("Seeker Registered Successfully!");
+          // Reset form inputs
+          signupForm.reset();
+          // Redirect to index page
+          window.location.href = "index.html";
+        })
+        .catch((error) => {
+          console.error("Error registering service provider: ", error);
+        });
+    });
+  </script>
+
+</body>
+
+</html>
